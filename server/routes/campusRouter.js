@@ -1,8 +1,8 @@
-const campusRouter = require('express').Router();
-const { Campuses } = require('../db');
+const campusRouter = require("express").Router();
+const { Campuses } = require("../db");
 
-// getting all the campuses
-campusRouter.get('/', (req, res, next) => {
+// getting all the campuses /api/campuses
+campusRouter.get("/campuses", (req, res, next) => {
   Campuses.findAll()
     .then(resp => {
       res.json(resp);

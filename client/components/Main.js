@@ -1,66 +1,54 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import store, { getCampuses, getStudents } from '../store';
-import axios from 'axios';
+import React, { Component } from "react";
+import { Route, Switch, Link, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
+import store, { fetchCampuses, fetchStudents } from "../store";
+import axios from "axios";
+import Students from "./Students";
+import Campuses from "./Campuses";
+import Home from "./Home";
 
 export default class Main extends Component {
-  constructor() {
-    super();
-    this.state = store.getState();
-  }
+  // this will get the store filled with the requisite data
   componentDidMount() {
-    // dispatch to get students
-    axios
-      .get('/students')
-      .then(resp => resp.data)
-      .then(students => {
-        const action = getStudents(students);
-        store.dispatch(action);
-      });
     // dispatch to get campuses
-    axios
-      .get('/campuses')
-      .then(resp => resp.data)
-      .then(campuses => {
-        const action = getCampuses(campuses);
-        store.dispatch(action);
-      });
+    // dispatch to get students
+    const campusesThunk = fetchCampuses();
+    const studentsThunk = fetchStudents();
+    store.dispatch(studentsThunk);
+    store.dispatch(campusesThunk);
   }
   render() {
     return (
-      <div className="columns is-multiline">
-        <div class="card is-one-quarter">
-          <div class="card-image">
-            {/* <figure class="image">
-                  <img src="" alt="Placeholder image" />
-                </figure> */}
-          </div>
-          <div class="card-content">
-            <div class="media">
-              <div class="media-left">
-                {/* <figure class="image">
-                      <img
-                        src="https://bulma.io/images/placeholders/96x96.png"
-                        alt="Placeholder image"
-                      />
-                    </figure> */}
-              </div>
-              <div class="media-content">
-                <p class="title is-4">John Smith</p>
-                <p class="subtitle is-6">@johnsmith</p>
-              </div>
-            </div>
-
-            <div class="content">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-              nec iaculis mauris. <a>@bulmaio</a>.<a href="#">#css</a>{' '}
-              <a href="#">#responsive</a>
+      <div>
+        <section className="hero is-primary">
+          <div className="hero-body">
+            <div className="container">
+              <h1 className="title">WELCOME TO CAMPUS</h1>
+              <Link to="/students">Go to ALL Students</Link>
               <br />
-              <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+              <Link to="/campuses">Go to ALL Campuses</Link>
+              <br />
+              <Link to="/">Go Home</Link>
             </div>
           </div>
-        </div>
+        </section>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/students" component={Students} />
+          <Route path="/campuses" component={Campuses} />
+          {/* <Redirect to="/" /> */}
+        </Switch>
+        {/* <Route path="/students" component={Campuses} /> */}
       </div>
     );
   }
 }
+
+// const mapStateToProps = state => {
+//   return {
+//     students: state.students,
+//     campuses: state.campuses
+//   };
+// };
+
+// export default connect(mapStateToProps)(Main);
