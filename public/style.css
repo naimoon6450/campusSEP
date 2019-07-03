@@ -1,3 +1,11 @@
+#main {
+  font-family: 'Russo One', sans-serif;
+}
+
 #studentContainer {
   margin: 3em;
+}
+
+#navbar {
+  padding: 2em;
 }

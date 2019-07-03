@@ -1,6 +1,6 @@
-import React from "react";
-import { connect } from "react-redux";
-import CampusCard from "./CampuseCard";
+import React from 'react';
+import { connect } from 'react-redux';
+import CampusCard from './CampusCard';
 
 const Campuses = props => {
   const { campuses } = props;
@@ -18,7 +18,7 @@ const Campuses = props => {
 const mapStateToProps = state => {
   return {
     students: state.students,
-    campuses: state.campuses
+    campuses: state.campuses,
   };
 };
 

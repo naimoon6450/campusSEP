@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 const StudentCard = props => {
   const { student } = props;
@@ -7,7 +7,11 @@ const StudentCard = props => {
       <div className="card">
         <div className="card-image">
           <figure className="image">
-            <img src={student.imageUrl} alt="Placeholder image" />
+            <img
+              src={student.imageUrl}
+              alt="Placeholder image"
+              style={{ objectFit: 'cover', height: '300px' }}
+            />
           </figure>
         </div>
         <div className="card-content">

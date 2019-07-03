@@ -1,11 +1,9 @@
-import React, { Component } from "react";
-import { Route, Switch, Link, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
-import store, { fetchCampuses, fetchStudents } from "../store";
-import axios from "axios";
-import Students from "./Students";
-import Campuses from "./Campuses";
-import Home from "./Home";
+import React, { Component } from 'react';
+import { Route, Switch, Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import store, { fetchCampuses, fetchStudents } from '../store';
+import axios from 'axios';
+import { Students, Campuses, Home, Navbar } from './index';
 
 export default class Main extends Component {
   // this will get the store filled with the requisite data
@@ -20,18 +18,7 @@ export default class Main extends Component {
   render() {
     return (
       <div>
-        <section className="hero is-primary">
-          <div className="hero-body">
-            <div className="container">
-              <h1 className="title">WELCOME TO CAMPUS</h1>
-              <Link to="/students">Go to ALL Students</Link>
-              <br />
-              <Link to="/campuses">Go to ALL Campuses</Link>
-              <br />
-              <Link to="/">Go Home</Link>
-            </div>
-          </div>
-        </section>
+        <Navbar />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route path="/students" component={Students} />
