@@ -5,12 +5,14 @@ import axios from "axios";
 
 const initialState = {
   students: [],
-  campuses: []
+  campuses: [],
+  currentStudent: ""
 };
 
 // action types
 const GET_STUDENTS = "GET_STUDENTS";
 const GET_CAMPUSES = "GET_CAMPUSES";
+const GET_SINGLE_STUDENT = "GET_SINGLE_STUDENT";
 
 // action creators
 const getStudents = students => {
@@ -26,6 +28,13 @@ const getCampuses = campuses => {
   };
 };
 
+const getStudent = currStudent => {
+  return {
+    type: GET_SINGLE_STUDENT,
+    currStudent
+  };
+};
+
 // thunks for fetching
 export const fetchStudents = () => {
   return dispatch => {
@@ -34,7 +43,8 @@ export const fetchStudents = () => {
       .then(resp => resp.data)
       .then(students => {
         dispatch(getStudents(students));
-      });
+      })
+      .catch(e => console.error(e));
   };
 };
 
@@ -45,7 +55,20 @@ export const fetchCampuses = () => {
       .then(resp => resp.data)
       .then(campuses => {
         dispatch(getCampuses(campuses));
-      });
+      })
+      .catch(e => console.error(e));
+  };
+};
+
+export const fetchSingleStudent = studId => {
+  return dispatch => {
+    return axios
+      .get(`api/students/${studId}`)
+      .then(resp => resp.data)
+      .then(student => {
+        dispatch(getStudent(student));
+      })
+      .catch(e => console.error(e));
   };
 };
 
@@ -60,6 +83,11 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         campuses: action.campuses
+      };
+    case GET_SINGLE_STUDENT:
+      return {
+        ...state,
+        currentStudent: action.currStudent
       };
     default:
       return state;
