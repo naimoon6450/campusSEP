@@ -2,10 +2,10 @@ const { Students, Campuses, db } = require('./server/db');
 
 const students = [
   { firstName: 'Naimun', lastName: 'Siraj', email: 'ns@fsa.com', gpa: 4.0 },
-  { firstName: 'Siraj', lastName: 'Naimu', email: 'nsad@fsa.com', gpa: 4.0 },
-  { firstName: 'Naymoon', lastName: 'Jaris', email: 'nsas@fsa.com', gpa: 4.0 },
-  { firstName: 'Numian', lastName: 'Siraj', email: 'nsqw@fsa.com', gpa: 4.0 },
-  { firstName: 'Nemo', lastName: 'Sensei', email: 'nsas1@fsa.com', gpa: 4.0 },
+  { firstName: 'Siraj', lastName: 'Naimu', email: 'nsad@fsa.com', gpa: 3.5 },
+  { firstName: 'Naymoon', lastName: 'Jaris', email: 'nsas@fsa.com', gpa: 2.3 },
+  { firstName: 'Numian', lastName: 'Siraj', email: 'nsqw@fsa.com', gpa: 3.9 },
+  { firstName: 'Nemo', lastName: 'Sensei', email: 'nsas1@fsa.com', gpa: 3.6 },
 ];
 
 const campuses = [

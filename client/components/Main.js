@@ -1,9 +1,16 @@
-import React, { Component } from "react";
-import { Route, Switch, Link, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
-import store, { fetchCampuses, fetchStudents } from "../store";
-import axios from "axios";
-import { Students, Campuses, Home, Navbar, SingleStudent } from "./index";
+import React, { Component } from 'react';
+import { Route, Switch, Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import store, { fetchCampuses, fetchStudents } from '../store';
+import axios from 'axios';
+import {
+  Students,
+  Campuses,
+  Home,
+  Navbar,
+  SingleStudent,
+  SingleCampus,
+} from './index';
 
 export default class Main extends Component {
   // this will get the store filled with the requisite data
@@ -24,6 +31,7 @@ export default class Main extends Component {
           <Route exact path="/students" component={Students} />
           <Route exact path="/campuses" component={Campuses} />
           <Route path="/students/:id" component={SingleStudent} />
+          {/* <Route path="/campuses/:id" component={SingleCampus} /> */}
           {/* <Redirect to="/" /> */}
         </Switch>
         {/* <Route path="/students" component={Campuses} /> */}

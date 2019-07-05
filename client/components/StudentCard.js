@@ -1,21 +1,18 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const StudentCard = props => {
-  const { student, studentClickedEvt } = props;
+  const { student } = props;
   return (
     <div className="column is-4">
-      <Link
-        to={`/students/${student.id}`}
-        onClick={() => studentClickedEvt(student.id)}
-      >
+      <Link to={`/students/${student.id}`}>
         <div className="card">
           <div className="card-image">
             <figure className="image">
               <img
                 src={student.imageUrl}
                 alt="Placeholder image"
-                style={{ objectFit: "cover", height: "300px" }}
+                style={{ objectFit: 'cover', height: '300px' }}
               />
             </figure>
           </div>
