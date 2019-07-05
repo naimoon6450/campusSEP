@@ -20,6 +20,8 @@ const campuses = [
   },
 ];
 
+const getRandomCampusId = () => Math.floor(Math.random() * campuses.length) + 1;
+
 // seeding database
 const seed = () => {
   db.sync({ force: true })
@@ -27,7 +29,9 @@ const seed = () => {
       console.log('db synced');
       Promise.all(
         students.map(student => {
-          Students.create(student);
+          Students.create(student).then(student => {
+            student.setCampus(getRandomCampusId());
+          });
         })
       );
       Promise.all(

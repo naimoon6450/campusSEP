@@ -1,10 +1,11 @@
-import Students from "./Students";
-import Campuses from "./Campuses";
-import Home from "./Home";
-import Navbar from "./Navbar";
-import StudentCard from "./StudentCard";
-import CampusCard from "./CampusCard";
-import SingleStudent from "./SingleStudent";
+import Students from './Students';
+import Campuses from './Campuses';
+import Home from './Home';
+import Navbar from './Navbar';
+import StudentCard from './StudentCard';
+import CampusCard from './CampusCard';
+import SingleStudent from './SingleStudent';
+import SingleCampus from './SingleCampus';
 
 export {
   Students,
@@ -13,5 +14,6 @@ export {
   Navbar,
   StudentCard,
   CampusCard,
-  SingleStudent
+  SingleStudent,
+  SingleCampus,
 };

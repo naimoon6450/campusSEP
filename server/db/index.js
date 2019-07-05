@@ -4,6 +4,6 @@ const db = require('./dbconn');
 
 // associations
 Campuses.hasMany(Students);
-Students.belongsTo(Campuses);
+Students.belongsTo(Campuses, { as: 'campus' });
 
 module.exports = { Students, Campuses, db };
