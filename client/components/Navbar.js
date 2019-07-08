@@ -5,7 +5,7 @@ const Navbar = () => {
   return (
     <nav
       id="navbar"
-      className="navbar"
+      className="navbar is-link"
       role="navigation"
       aria-label="main navigation"
     >
