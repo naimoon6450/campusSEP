@@ -1,52 +1,52 @@
-import { createStore, applyMiddleware } from "redux";
-import loggingMiddleware from "redux-logger";
-import thunkMiddleware from "redux-thunk";
-import axios from "axios";
+import { createStore, applyMiddleware } from 'redux';
+import loggingMiddleware from 'redux-logger';
+import thunkMiddleware from 'redux-thunk';
+import axios from 'axios';
 
 const initialState = {
   students: [],
   campuses: [],
-  currentStudent: "",
-  currentCampus: "",
+  currentStudent: '',
+  currentCampus: '',
   // campus form states
-  uniName: "",
-  uniAddress: "",
-  uniDescription: ""
+  uniName: '',
+  uniAddress: '',
+  uniDescription: '',
 };
 
 // action types
-const GET_STUDENTS = "GET_STUDENTS";
-const GET_CAMPUSES = "GET_CAMPUSES";
-const GET_SINGLE_STUDENT = "GET_SINGLE_STUDENT";
-const GET_SINGLE_CAMPUS = "GET_SINGLE_CAMPUS";
-const WRITE_NEW_CAMPUS = "WRITE_NEW_CAMPUS";
-const POST_NEW_CAMPUS = "POST_NEW_CAMPUS";
+const GET_STUDENTS = 'GET_STUDENTS';
+const GET_CAMPUSES = 'GET_CAMPUSES';
+const GET_SINGLE_STUDENT = 'GET_SINGLE_STUDENT';
+const GET_SINGLE_CAMPUS = 'GET_SINGLE_CAMPUS';
+const WRITE_NEW_CAMPUS = 'WRITE_NEW_CAMPUS';
+const POST_NEW_CAMPUS = 'POST_NEW_CAMPUS';
 
 // action creators
 const getStudents = students => {
   return {
     type: GET_STUDENTS,
-    students
+    students,
   };
 };
 const getCampuses = campuses => {
   return {
     type: GET_CAMPUSES,
-    campuses
+    campuses,
   };
 };
 
 const getStudent = currStudent => {
   return {
     type: GET_SINGLE_STUDENT,
-    currStudent
+    currStudent,
   };
 };
 
 const getCampus = currCampus => {
   return {
     type: GET_SINGLE_CAMPUS,
-    currCampus
+    currCampus,
   };
 };
 
@@ -54,7 +54,14 @@ export const writeCampus = (campusFormVal, campusField) => {
   return {
     type: WRITE_NEW_CAMPUS,
     fieldToChange: campusField,
-    fieldValue: campusFormVal
+    fieldValue: campusFormVal,
+  };
+};
+
+export const postCampus = campusObj => {
+  return {
+    type: POST_NEW_CAMPUS,
+    campusObj,
   };
 };
 
@@ -62,7 +69,7 @@ export const writeCampus = (campusFormVal, campusField) => {
 export const fetchStudents = () => {
   return dispatch => {
     return axios
-      .get("/api/students")
+      .get('/api/students')
       .then(resp => resp.data)
       .then(students => {
         dispatch(getStudents(students));
@@ -74,7 +81,7 @@ export const fetchStudents = () => {
 export const fetchCampuses = () => {
   return dispatch => {
     return axios
-      .get("/api/campuses")
+      .get('/api/campuses')
       .then(resp => resp.data)
       .then(campuses => {
         dispatch(getCampuses(campuses));
@@ -107,11 +114,16 @@ export const fetchSingleCampus = campId => {
   };
 };
 
-export const postNewCampus = campObj => {
+export const postNewCampusToDb = (campObj, history) => {
   return dispatch => {
-    return axios.post("/api/campuses", campObj).then(resp => {
-      console.log(resp);
-    });
+    return axios
+      .post('/api/campuses', campObj)
+      .then(resp => resp.data)
+      .then(campus => {
+        // console.log(campus);
+        dispatch(postCampus(campus));
+        history.push('/campuses');
+      });
   };
 };
 
@@ -120,27 +132,32 @@ const reducer = (state = initialState, action) => {
     case GET_STUDENTS:
       return {
         ...state,
-        students: action.students
+        students: action.students,
       };
     case GET_CAMPUSES:
       return {
         ...state,
-        campuses: action.campuses
+        campuses: action.campuses,
       };
     case GET_SINGLE_STUDENT:
       return {
         ...state,
-        currentStudent: action.currStudent
+        currentStudent: action.currStudent,
       };
     case GET_SINGLE_CAMPUS:
       return {
         ...state,
-        currentCampus: action.currCampus
+        currentCampus: action.currCampus,
       };
     case WRITE_NEW_CAMPUS:
       return {
         ...state,
-        [action.fieldToChange]: action.fieldValue
+        [action.fieldToChange]: action.fieldValue,
+      };
+    case POST_NEW_CAMPUS:
+      return {
+        ...state,
+        campuses: [...state.campuses, action.campusObj],
       };
     default:
       return state;

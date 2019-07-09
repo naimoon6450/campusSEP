@@ -1,5 +1,5 @@
 #main {
-  font-family: "Russo One", sans-serif;
+  font-family: 'Russo One', sans-serif;
 }
 
 #container {
@@ -10,6 +10,6 @@
   padding: 0.5em;
 }
 
-#newCampus {
+#newButton {
   padding-bottom: 2em;
 }
