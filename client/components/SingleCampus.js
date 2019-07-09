@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
-import store, { fetchSingleCampus } from '../store';
-import CampusCard from './CampusCard';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router";
+import store, { fetchSingleCampus } from "../store";
+import CampusCard from "./CampusCard";
 // show single campus page when button clicked
 class SingleCampus extends Component {
   componentDidMount() {
@@ -12,7 +12,7 @@ class SingleCampus extends Component {
   }
   render() {
     const { currentCampus, students } = this.props;
-
+    let studCount = 0;
     return (
       <div className="columns">
         <div className="column is-half is-offset-one-quarter">
@@ -39,6 +39,7 @@ class SingleCampus extends Component {
                 Current Students:
                 {students.map(student => {
                   if (student.campusId == currentCampus.id) {
+                    studCount++;
                     return (
                       <li key={student.id}>{`${student.firstName} ${
                         student.lastName
@@ -46,6 +47,7 @@ class SingleCampus extends Component {
                     );
                   }
                 })}
+                {studCount === 0 && <li>No students in this university</li>}
                 <br />
                 <time dateTime="2016-1-1">11:09 PM - 1 Jan 2016</time>
               </div>
@@ -60,7 +62,7 @@ class SingleCampus extends Component {
 const mapStateToProps = state => {
   return {
     currentCampus: state.currentCampus,
-    students: state.students,
+    students: state.students
   };
 };
 

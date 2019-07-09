@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router';
-import store, { fetchSingleStudent } from '../store';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { withRouter } from "react-router";
+import store, { fetchSingleStudent } from "../store";
 // show single student page when button clicked
 class SingleStudent extends Component {
   componentDidMount() {
@@ -10,7 +10,13 @@ class SingleStudent extends Component {
     store.dispatch(action);
   }
   render() {
-    const { currentStudent } = this.props;
+    const { currentStudent, campuses } = this.props;
+    // may not be the best approach
+    const studCampus = campuses.map(campus => {
+      if (campus.id === currentStudent.campusId) {
+        return campus.name;
+      }
+    });
 
     return (
       // doesn't persist may need state here
@@ -37,6 +43,10 @@ class SingleStudent extends Component {
                     currentStudent.lastName
                   }`}</p>
                   <p className="subtitle is-6">
+                    {currentStudent.campusId
+                      ? studCampus
+                      : "~ ~ University dropout ~ ~"}
+                    <br />
                     {currentStudent.email} | GPA: {currentStudent.gpa}
                   </p>
                 </div>
@@ -60,6 +70,7 @@ class SingleStudent extends Component {
 const mapStateToProps = state => {
   return {
     currentStudent: state.currentStudent,
+    campuses: state.campuses
   };
 };
 

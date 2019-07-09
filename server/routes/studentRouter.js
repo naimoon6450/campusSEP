@@ -20,4 +20,20 @@ studentRouter.get("/students/:id", (req, res, next) => {
     .catch(next);
 });
 
+// post request to add new student /api/students
+studentRouter.post("/students", (req, res, next) => {
+  // the req.body should have the relevant data fields to add new
+  Students.findOrCreate({
+    where: { email: req.body.email },
+    defaults: {
+      firstName: req.body.firstName,
+      lastName: req.body.lastName
+    }
+  })
+    .spread((user, created) => {
+      created ? res.send(user) : res.send("Campus not created");
+    })
+    .catch(next);
+});
+
 module.exports = studentRouter;

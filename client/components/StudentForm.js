@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-// import { writeCampus, postNewCampusToDb } from '../store';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { postNewStudentToDb } from "../store";
 
 const StudentForm = props => {
   const { handleSubmit } = props;
@@ -42,7 +42,7 @@ const StudentForm = props => {
         <div className="control">
           <textarea
             name="email"
-            className="textarea"
+            className="input is-success"
             placeholder="somename@sorts.com"
             // onChange={handleChange}
             required
@@ -53,7 +53,7 @@ const StudentForm = props => {
       <div className="control">
         <button
           type="submit"
-          style={{ fontFamily: 'Russo One' }}
+          style={{ fontFamily: "Russo One" }}
           className="button is-link"
         >
           Submit
@@ -67,13 +67,13 @@ const mapDispatchToProps = (dispatch, ownProps) => {
   return {
     handleSubmit: evt => {
       evt.preventDefault();
-      //   const campObj = {
-      //     uniName: evt.target.uniName.value,
-      //     uniAddress: evt.target.uniAddress.value,
-      //     uniDescription: evt.target.uniDescription.value,
-      //   };
-      //   dispatch(postNewCampusToDb(campObj, ownProps.history));
-    },
+      const studObj = {
+        firstName: evt.target.firstName.value,
+        lastName: evt.target.lastName.value,
+        email: evt.target.email.value
+      };
+      dispatch(postNewStudentToDb(studObj, ownProps.history));
+    }
   };
 };
 
