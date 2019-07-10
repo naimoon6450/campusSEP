@@ -36,4 +36,10 @@ studentRouter.post("/students", (req, res, next) => {
     .catch(next);
 });
 
+// delete a student /api/campus
+studentRouter.delete("/students/:id", (req, res, next) => {
+  const studId = req.params.id;
+  Students.destroy({ where: { id: studId } });
+});
+
 module.exports = studentRouter;

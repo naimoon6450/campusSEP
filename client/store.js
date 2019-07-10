@@ -23,6 +23,7 @@ const WRITE_NEW_CAMPUS = "WRITE_NEW_CAMPUS";
 const POST_NEW_CAMPUS = "POST_NEW_CAMPUS";
 const WRITE_NEW_STUDENT = "WRITE_NEW_STUDENT";
 const POST_NEW_STUDENT = "POST_NEW_STUDENT";
+const DELETE_STUDENT_FROM_STORE = "DELETE_STUDENT_FROM_STORE";
 
 // action creators
 const getStudents = students => {
@@ -72,6 +73,13 @@ export const postStudent = studObj => {
   return {
     type: POST_NEW_STUDENT,
     studObj
+  };
+};
+
+export const deleteStudFromStore = studId => {
+  return {
+    type: DELETE_STUDENT_FROM_STORE,
+    studId
   };
 };
 
@@ -152,6 +160,15 @@ export const postNewStudentToDb = (studObj, history) => {
   };
 };
 
+export const deleteStudFromDb = (studId, history) => {
+  return dispatch => {
+    return axios
+      .delete(`/api/students/${studId}`)
+      .then(resp => resp.data)
+      .catch(e => console.error(e));
+  };
+};
+
 const reducer = (state = initialState, action) => {
   switch (action.type) {
     case GET_STUDENTS:
@@ -188,6 +205,14 @@ const reducer = (state = initialState, action) => {
       return {
         ...state,
         students: [...state.students, action.studObj]
+      };
+    case DELETE_STUDENT_FROM_STORE:
+      const newStudentArr = state.students.filter(stud => {
+        if (stud.id !== action.studId) return stud;
+      });
+      return {
+        ...state,
+        students: newStudentArr
       };
     default:
       return state;

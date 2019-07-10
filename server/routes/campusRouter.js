@@ -36,4 +36,7 @@ campusRouter.post("/campuses", (req, res, next) => {
     .catch(next);
 });
 
+// delete a campus /api/campus
+campusRouter.delete("/campuses", (req, res, next) => {});
+
 module.exports = campusRouter;

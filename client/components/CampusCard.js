@@ -1,26 +1,26 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Link } from "react-router-dom";
 
 const CampusCard = props => {
   const { campus } = props;
   return (
-    <Link to={`/campuses/${campus.id}`}>
-      <div className="card">
-        <div className="card-image">
+    <div className="card">
+      <div className="card-image">
+        <Link to={`/campuses/${campus.id}`}>
           <figure className="image">
             <img src={campus.imageUrl} alt="Placeholder image" />
           </figure>
-        </div>
-        {/* 
-          <div className="content">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
-            nec iaculis mauris. <a>@bulmaio</a>.<a href="#">#css</a>{" "}
-            <a href="#">#responsive</a>
-            <br />
-            <time dateTime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-          </div> */}
+        </Link>
       </div>
-    </Link>
+
+      <div className="card-content">
+        <div className="media">
+          <div className="media-content">
+            <a class="button is-danger">Delete</a>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 };
 
