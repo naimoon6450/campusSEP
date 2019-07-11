@@ -1,8 +1,10 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { deleteStudFromDb } from '../store';
 
 const StudentCard = props => {
-  const { student } = props;
+  const { student, deleteStudFromDb, deleteStudFromStore } = props;
+
   return (
     <div className="column is-4">
       <div className="card">
@@ -12,7 +14,7 @@ const StudentCard = props => {
               <img
                 src={student.imageUrl}
                 alt="Placeholder image"
-                style={{ objectFit: "cover", height: "300px" }}
+                style={{ objectFit: 'cover', height: '300px' }}
               />
             </figure>
           </Link>
@@ -23,7 +25,15 @@ const StudentCard = props => {
               <p className="title is-4">
                 {`${student.firstName}, ${student.lastName}`}
               </p>
-              <a class="button is-danger">Delete</a>
+              <a
+                className="button is-danger"
+                onClick={() => {
+                  deleteStudFromDb(student.id);
+                  deleteStudFromStore(student.id);
+                }}
+              >
+                Delete
+              </a>
             </div>
           </div>
           {/* 

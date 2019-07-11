@@ -2,9 +2,10 @@ import React from 'react';
 import { connect } from 'react-redux';
 import CampusCard from './CampusCard';
 import { Link } from 'react-router-dom';
+import { deleteCampusFromDb, deleteCampusFromStore } from '../store';
 
 const Campuses = props => {
-  const { campuses } = props;
+  const { campuses, delCampusFromDb, delCampusFromStore } = props;
   return (
     <div id="container">
       <div id="newButton">
@@ -17,7 +18,11 @@ const Campuses = props => {
           return (
             campus.id && (
               <div className="column is-4" key={campus.id}>
-                <CampusCard campus={campus} />
+                <CampusCard
+                  campus={campus}
+                  delCampusFromDb={delCampusFromDb}
+                  delCampusFromStore={delCampusFromStore}
+                />
               </div>
             )
           );
@@ -34,4 +39,18 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Campuses);
+const mapDispatchToProps = dispatch => {
+  return {
+    delCampusFromDb: campId => {
+      dispatch(deleteCampusFromDb(campId));
+    },
+    delCampusFromStore: campId => {
+      dispatch(deleteCampusFromStore(campId));
+    },
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Campuses);

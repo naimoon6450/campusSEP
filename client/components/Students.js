@@ -1,7 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import StudentCard from './StudentCard';
-import { fetchSingleStudent } from '../store';
+import {
+  fetchSingleStudent,
+  deleteStudFromDb,
+  deleteStudFromStore,
+} from '../store';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 
@@ -15,7 +19,14 @@ const Students = props => {
       </div>
       <div className="columns is-multiline">
         {props.students.map(student => {
-          return <StudentCard key={student.id} student={student} />;
+          return (
+            <StudentCard
+              key={student.id}
+              student={student}
+              deleteStudFromDb={props.deleteStudFromDb}
+              deleteStudFromStore={props.deleteStudFromStore}
+            />
+          );
         })}
       </div>
     </div>
@@ -29,4 +40,18 @@ const mapStateToProps = state => {
   };
 };
 
-export default connect(mapStateToProps)(Students);
+const mapDispatchToProps = dispatch => {
+  return {
+    deleteStudFromDb: studId => {
+      dispatch(deleteStudFromDb(studId));
+    },
+    deleteStudFromStore: studId => {
+      dispatch(deleteStudFromStore(studId));
+    },
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Students);

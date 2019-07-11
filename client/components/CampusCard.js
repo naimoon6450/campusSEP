@@ -1,8 +1,8 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 const CampusCard = props => {
-  const { campus } = props;
+  const { campus, delCampusFromDb, delCampusFromStore } = props;
   return (
     <div className="card">
       <div className="card-image">
@@ -16,7 +16,15 @@ const CampusCard = props => {
       <div className="card-content">
         <div className="media">
           <div className="media-content">
-            <a class="button is-danger">Delete</a>
+            <a
+              className="button is-danger"
+              onClick={() => {
+                delCampusFromDb(campus.id);
+                delCampusFromStore(campus.id);
+              }}
+            >
+              Delete
+            </a>
           </div>
         </div>
       </div>
