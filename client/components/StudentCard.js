@@ -1,6 +1,6 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { deleteStudFromDb } from '../store';
+import React from "react";
+import { Link } from "react-router-dom";
+import { deleteStudFromDb } from "../store";
 
 const StudentCard = props => {
   const { student, deleteStudFromDb, deleteStudFromStore } = props;
@@ -14,7 +14,7 @@ const StudentCard = props => {
               <img
                 src={student.imageUrl}
                 alt="Placeholder image"
-                style={{ objectFit: 'cover', height: '300px' }}
+                style={{ objectFit: "cover", height: "300px" }}
               />
             </figure>
           </Link>

@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { writeCampus, postNewCampusToDb } from '../store';
-import { Link } from 'react-router-dom';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { writeCampus, postNewCampusToDb, validateFields } from "../store";
+import { Link } from "react-router-dom";
 /**
  * Steps for form creation / submission
  * Need some state that will hold the data onChange (uni name, address, desc)
@@ -21,10 +21,16 @@ const CampusForm = props => {
         <label className="label">University/College Name</label>
         <div className="control has-icons-left has-icons-right">
           <input
+            id="un"
             name="uniName"
             className="input is-success"
             type="text"
             placeholder="ABC University..."
+            onInvalid={() => {
+              validateFields("un", "University Name");
+            }}
+            onChange={() => validateFields("un")}
+            required
             // onChange={handleChange}
           />
           <span className="icon is-small is-left">
@@ -36,10 +42,16 @@ const CampusForm = props => {
         <label className="label">Address</label>
         <div className="control has-icons-left has-icons-right">
           <input
+            id="ad"
             name="uniAddress"
             className="input is-success"
             type="text"
             placeholder="116 ABC Street"
+            onInvalid={() => {
+              validateFields("ad", "Address");
+            }}
+            onChange={() => validateFields("ad")}
+            required
             // onChange={handleChange}
           />
           <span className="icon is-small is-left">
@@ -64,7 +76,7 @@ const CampusForm = props => {
       <div className="control">
         <button
           type="submit"
-          style={{ fontFamily: 'Russo One' }}
+          style={{ fontFamily: "Russo One" }}
           className="button is-link"
         >
           Submit
@@ -85,10 +97,10 @@ const mapDispatchToProps = (dispatch, ownProps) => {
       const campObj = {
         uniName: evt.target.uniName.value,
         uniAddress: evt.target.uniAddress.value,
-        uniDescription: evt.target.uniDescription.value,
+        uniDescription: evt.target.uniDescription.value
       };
       dispatch(postNewCampusToDb(campObj, ownProps.history));
-    },
+    }
   };
 };
 

@@ -19,14 +19,21 @@ const Navbar = () => {
           className="navbar-burger burger"
           aria-label="menu"
           aria-expanded="false"
-          data-target="navbarBasicExample"
+          data-target="navbarContent"
+          onClick={() => {
+            // used https://github.com/jgthms/bulma/issues/856 to find solution of burger toggling
+            document
+              .querySelector(".navbar-menu")
+              .classList.toggle("is-active");
+          }}
         >
           <span aria-hidden="true" />
           <span aria-hidden="true" />
           <span aria-hidden="true" />
         </a>
       </div>
-      <div className="navbar-menu">
+
+      <div id="navbarContent" className="navbar-menu">
         <div className="navbar-start">
           <Link to="/students" className="navbar-item">
             All Students
