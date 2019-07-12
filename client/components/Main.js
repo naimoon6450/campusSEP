@@ -31,14 +31,14 @@ export default class Main extends Component {
         <Navbar />
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/students" component={Students} />
+          <Route exact path="/students" render={Students} />
           <Route exact path="/campuses" component={Campuses} />
-          <Route exact path="/students/addNewStudent" component={StudentForm} />
+          {/* <Route exact path="/students/addNewStudent" component={StudentForm} /> */}
           <Route exact path="/campuses/addNewCampus" component={CampusForm} />
-          <Route path="/students/:id" component={SingleStudent} />
+          {/* <Route path="/students/:id" component={SingleStudent} /> */}
           <Route path="/campuses/:id" component={SingleCampus} />
           {/* No match route */}
-          <Route component={NoMatch} />
+          {/* <Route component={NoMatch} /> */}
           {/* <Redirect to="/" /> */}
         </Switch>
         {/* <Route path="/students" component={Campuses} /> */}

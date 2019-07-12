@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { withRouter } from "react-router";
 import store, { fetchSingleStudent } from "../store";
 // show single student page when button clicked
 class SingleStudent extends Component {
@@ -17,7 +16,6 @@ class SingleStudent extends Component {
         return campus.name;
       }
     });
-
     return (
       // doesn't persist may need state here
       <div className="columns">
@@ -74,4 +72,4 @@ const mapStateToProps = state => {
   };
 };
 
-export default withRouter(connect(mapStateToProps)(SingleStudent));
+export default connect(mapStateToProps)(SingleStudent);

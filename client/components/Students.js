@@ -1,13 +1,13 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import StudentCard from './StudentCard';
+import React from "react";
+import { connect } from "react-redux";
+import { StudentCard, SingleStudent, NoMatch } from "./index";
 import {
   fetchSingleStudent,
   deleteStudFromDb,
-  deleteStudFromStore,
-} from '../store';
-import { withRouter } from 'react-router';
-import { Link } from 'react-router-dom';
+  deleteStudFromStore
+} from "../store";
+import { withRouter } from "react-router";
+import { Link, Route } from "react-router-dom";
 
 const Students = props => {
   return (
@@ -25,10 +25,14 @@ const Students = props => {
               student={student}
               deleteStudFromDb={props.deleteStudFromDb}
               deleteStudFromStore={props.deleteStudFromStore}
+              match={props.match}
             />
           );
         })}
       </div>
+
+      {/* Route not working... */}
+      <Route path={`${props.match.url}/:id`} component={NoMatch} />
     </div>
   );
 };
@@ -36,7 +40,7 @@ const Students = props => {
 const mapStateToProps = state => {
   return {
     students: state.students,
-    campuses: state.campuses,
+    campuses: state.campuses
   };
 };
 
@@ -47,11 +51,13 @@ const mapDispatchToProps = dispatch => {
     },
     deleteStudFromStore: studId => {
       dispatch(deleteStudFromStore(studId));
-    },
+    }
   };
 };
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Students);
+export default withRouter(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(Students)
+);

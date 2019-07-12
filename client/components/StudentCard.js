@@ -1,15 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, Route } from "react-router-dom";
 import { deleteStudFromDb } from "../store";
 
 const StudentCard = props => {
-  const { student, deleteStudFromDb, deleteStudFromStore } = props;
+  const { student, deleteStudFromDb, deleteStudFromStore, match } = props;
 
   return (
     <div className="column is-4">
       <div className="card">
         <div className="card-image">
-          <Link to={`/students/${student.id}`}>
+          <Link to={`${props.match.url}/${student.id}`}>
             <figure className="image">
               <img
                 src={student.imageUrl}

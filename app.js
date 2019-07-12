@@ -19,7 +19,7 @@ app.use("/api", studentRouter);
 app.use("/api", campusRouter);
 
 // listen on port
-const PORT = 3000;
+const PORT = 8080;
 db.sync()
   .then(() => {
     console.log("db connected...");
