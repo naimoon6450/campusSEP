@@ -32,7 +32,7 @@ const Students = props => {
       </div>
 
       {/* Route not working... */}
-      <Route path={`${props.match.url}/:id`} component={NoMatch} />
+      {/* <Route path={`${props.match.url}/:id`} component={NoMatch} /> */}
     </div>
   );
 };

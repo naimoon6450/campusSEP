@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import store, { fetchSingleStudent } from "../store";
+import NoMatch from "./NoMatch";
 // show single student page when button clicked
 class SingleStudent extends Component {
   componentDidMount() {
@@ -18,49 +19,53 @@ class SingleStudent extends Component {
     });
     return (
       // doesn't persist may need state here
-      <div className="columns">
-        <div className="column is-half is-offset-one-quarter">
-          <div className="card">
-            <div className="card-image">
-              <figure className="image">
-                <img src={currentStudent.imageUrl} alt="Placeholder image" />
-              </figure>
-            </div>
-            <div className="card-content">
-              <div className="media">
-                <div className="media-left">
-                  <figure className="image is-48x48">
-                    <img
-                      src={currentStudent.imageUrl}
-                      alt="Placeholder image"
-                    />
-                  </figure>
-                </div>
-                <div className="media-content">
-                  <p className="title is-4">{`${currentStudent.firstName} ${
-                    currentStudent.lastName
-                  }`}</p>
-                  <p className="subtitle is-6">
-                    {currentStudent.campusId
-                      ? studCampus
-                      : "~ ~ University dropout ~ ~"}
-                    <br />
-                    {currentStudent.email} | GPA: {currentStudent.gpa}
-                  </p>
-                </div>
+      currentStudent ? (
+        <div className="columns">
+          <div className="column is-half is-offset-one-quarter">
+            <div className="card">
+              <div className="card-image">
+                <figure className="image">
+                  <img src={currentStudent.imageUrl} alt="Placeholder image" />
+                </figure>
               </div>
+              <div className="card-content">
+                <div className="media">
+                  <div className="media-left">
+                    <figure className="image is-48x48">
+                      <img
+                        src={currentStudent.imageUrl}
+                        alt="Placeholder image"
+                      />
+                    </figure>
+                  </div>
+                  <div className="media-content">
+                    <p className="title is-4">{`${currentStudent.firstName} ${
+                      currentStudent.lastName
+                    }`}</p>
+                    <p className="subtitle is-6">
+                      {currentStudent.campusId
+                        ? studCampus
+                        : "~ ~ University dropout ~ ~"}
+                      <br />
+                      {currentStudent.email} | GPA: {currentStudent.gpa}
+                    </p>
+                  </div>
+                </div>
 
-              <div className="content">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Phasellus nec iaculis mauris.
-                <a href="#">#css</a> <a href="#">#responsive</a>
-                <br />
-                <time dateTime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                <div className="content">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                  Phasellus nec iaculis mauris.
+                  <a href="#">#css</a> <a href="#">#responsive</a>
+                  <br />
+                  <time dateTime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+                </div>
               </div>
             </div>
           </div>
         </div>
-      </div>
+      ) : (
+        <NoMatch />
+      )
     );
   }
 }

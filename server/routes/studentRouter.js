@@ -15,7 +15,7 @@ studentRouter.get("/students/:id", (req, res, next) => {
   const studId = req.params.id;
   Students.findByPk(studId)
     .then(resp => {
-      res.json(resp);
+      resp ? res.json(resp) : res.sendStatus(404);
     })
     .catch(next);
 });

@@ -12,7 +12,8 @@ import {
   SingleCampus,
   CampusForm,
   StudentForm,
-  NoMatch
+  NoMatch,
+  BadPath
 } from "./index";
 
 export default class Main extends Component {
@@ -35,10 +36,10 @@ export default class Main extends Component {
           <Route exact path="/campuses" component={Campuses} />
           {/* <Route exact path="/students/addNewStudent" component={StudentForm} /> */}
           <Route exact path="/campuses/addNewCampus" component={CampusForm} />
-          {/* <Route path="/students/:id" component={SingleStudent} /> */}
+          <Route path="/students/:id" component={SingleStudent} />
           <Route path="/campuses/:id" component={SingleCampus} />
           {/* No match route */}
-          {/* <Route component={NoMatch} /> */}
+          <Route component={BadPath} />
           {/* <Redirect to="/" /> */}
         </Switch>
         {/* <Route path="/students" component={Campuses} /> */}

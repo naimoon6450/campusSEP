@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { withRouter } from "react-router";
 import store, { fetchSingleCampus } from "../store";
 import CampusCard from "./CampusCard";
+import { NoMatch } from "./index";
 // show single campus page when button clicked
 class SingleCampus extends Component {
   componentDidMount() {
@@ -13,7 +14,7 @@ class SingleCampus extends Component {
   render() {
     const { currentCampus, students } = this.props;
     let studCount = 0;
-    return (
+    return currentCampus ? (
       <div className="columns">
         <div className="column is-half is-offset-one-quarter">
           <div className="card">
@@ -55,6 +56,8 @@ class SingleCampus extends Component {
           </div>
         </div>
       </div>
+    ) : (
+      <NoMatch />
     );
   }
 }

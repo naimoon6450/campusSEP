@@ -9,6 +9,7 @@ import SingleCampus from "./SingleCampus";
 import CampusForm from "./CampusForm";
 import StudentForm from "./StudentForm";
 import NoMatch from "./NoMatch";
+import BadPath from "./BadPath";
 
 export {
   Students,
@@ -21,5 +22,6 @@ export {
   SingleCampus,
   CampusForm,
   StudentForm,
-  NoMatch
+  NoMatch,
+  BadPath
 };
