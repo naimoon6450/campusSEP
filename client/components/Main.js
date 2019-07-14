@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { Route, Switch, Link, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
-import store, { fetchCampuses, fetchStudents } from "../store";
-import axios from "axios";
+import React, { Component } from 'react';
+import { Route, Switch, Link, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import store, { fetchCampuses, fetchStudents } from '../store';
+import axios from 'axios';
 import {
   Students,
   Campuses,
@@ -13,8 +13,8 @@ import {
   CampusForm,
   StudentForm,
   NoMatch,
-  BadPath
-} from "./index";
+  BadPath,
+} from './index';
 
 export default class Main extends Component {
   // this will get the store filled with the requisite data
@@ -34,7 +34,7 @@ export default class Main extends Component {
           <Route exact path="/" component={Home} />
           <Route exact path="/students" render={Students} />
           <Route exact path="/campuses" component={Campuses} />
-          {/* <Route exact path="/students/addNewStudent" component={StudentForm} /> */}
+          <Route exact path="/students/addNewStudent" component={StudentForm} />
           <Route exact path="/campuses/addNewCampus" component={CampusForm} />
           <Route path="/students/:id" component={SingleStudent} />
           <Route path="/campuses/:id" component={SingleCampus} />
